@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>RuangBK — Bimbingan & Konseling Digital</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/screens.css" />
+</head>
+<body>
+  <div id="app-container">
+    <main id="app-screen"></main>
+    <div id="bottom-nav-container"></div>
+    <div id="toast-container"></div>
+  </div>
+  <div id="modal-overlay" onclick="if(event.target === this) closeModal()"></div>
+
+  <script src="cordova.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+
+  <!-- Konfigurasi & Data Layer -->
+  <script src="./js/data/firebase-config.js"></script>
+  <script src="./js/data/storage.js"></script>
+  <script src="./js/modules/auth.js"></script>
+  <script src="./js/modules/student.js"></script>
+  <script src="./js/modules/safespace.js"></script>
+  <script src="./js/modules/counselor.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1658 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+}
+
+/* Layout Wrapper Utama */
+#app-container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+#app-screen {
+  width: 100%;
+  flex: 1;
+  min-width: 0;
+}
+
+/* --- SIDEBAR NAVIGASI (KIRI) --- */
+.app-sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, #1E3A8A 0%, #0F172A 100%);
+  color: var(--white);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.sidebar-brand-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 36px;
+  padding-left: 8px;
+}
+
+.brand-icon-box {
+  width: 32px;
+  height: 32px;
+  background-color: var(--blue-primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-title-text {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* List Menu Navigasi */
+.sidebar-menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+}
+
+.menu-item-btn {
+  width: 100%;
+  height: 48px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 16px;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.menu-item-btn:hover {
+  color: var(--white);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.menu-item-btn.active {
+  color: var(--white);
+  background: var(--blue-primary);
+  box-shadow: 0 4px 12px rgba(30, 80, 255, 0.3);
+}
+
+/* Banner Informasi Bawah Sidebar */
+.sidebar-footer-banner {
+  margin-top: auto;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-banner-icon {
+  width: 24px;
+  height: 24px;
+  color: #60A5FA;
+}
+
+.footer-banner-text {
+  font-size: 11px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* --- KONTEN UTAMA (KANAN) --- */
+.main-viewport {
+  background: #F4F7FE;
+  /* subtle wave background */
+  border-top-left-radius: 28px;
+  padding: 22px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+/* Topbar Header Dashboard */
+.topbar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-identity-group h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.user-identity-group p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.topbar-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.school-dropdown {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.notification-bell-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  position: relative;
+}
+
+.bell-badge-dot {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 6px;
+  height: 6px;
+  background-color: var(--pink-danger);
+  border-radius: 50%;
+}
+
+.user-avatar-initials {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--blue-primary);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Kotak Grid Grid multi-kolom dashboard */
+.dashboard-grid-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 28px;
+}
+
+.main-column {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.sidebar-column {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-grid-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   STUDENT DASHBOARD — MODERN EDTECH WORKSPACE
+   ========================================================================== */
+#app-screen:has(.student-shell) {
+  width: 100%;
+}
+
+#app-container:has(.student-shell) {
+  display: block;
+}
+
+@media (min-width: 769px) {
+  body:has(.student-shell),
+  #app-container:has(.student-shell) {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  #app-container:has(.student-shell) #bottom-nav-container {
+    display: none;
+  }
+}
+
+.student-shell {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(175deg, #1E4FBD 0%, #153A91 58%, #165AE3 100%);
+  color: var(--text-primary);
+}
+
+/* --- SIDEBAR NAVIGATION --- */
+.student-sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  width: 264px;
+  height: 100vh;
+  flex: 0 0 264px;
+  flex-direction: column;
+  padding: 28px 18px 24px;
+  overflow: hidden;
+  color: var(--white);
+  background: linear-gradient(175deg, #1E4FBD 0%, #153A91 58%, #165AE3 100%);
+  z-index: 2;
+}
+
+.sidebar-waves {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 240px;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.sidebar-waves svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.student-sidebar>*:not(.sidebar-waves) {
+  position: relative;
+  z-index: 1;
+}
+
+.student-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 8px;
+  color: var(--white);
+  font-size: 22px;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: -0.03em;
+}
+
+.student-brand-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 11px;
+  background: var(--white);
+  padding: 4px;
+  box-shadow: 0 4px 12px rgba(10, 29, 86, 0.18);
+  flex-shrink: 0;
+}
+
+.student-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 32px;
+}
+
+.student-menu button {
+  display: flex;
+  width: 100%;
+  min-height: 48px;
+  align-items: center;
+  gap: 14px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 14px;
+  color: rgba(255, 255, 255, 0.88);
+  background: transparent;
+  font: 600 14.5px var(--font-family);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.student-menu button svg {
+  color: rgba(255, 255, 255, 0.9);
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.student-menu button:hover:not(.active) {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.13);
+  transform: translateX(3px);
+}
+
+.student-menu button.active {
+  color: var(--blue-deep);
+  background: #F4F7FF;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(10, 29, 86, 0.18);
+}
+
+.student-menu button.active svg {
+  color: var(--blue-primary);
+}
+
+.student-menu button:last-child {
+  position: relative;
+  margin-top: 16px;
+}
+
+.student-menu button:last-child::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 8px;
+  right: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.student-side-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  margin-top: auto;
+  border-radius: 16px;
+  background: rgba(59, 130, 246, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+}
+
+.student-side-note-logo {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  border-radius: 9px;
+  background: var(--white);
+  padding: 3px;
+  box-shadow: 0 2px 8px rgba(10, 29, 86, 0.14);
+  flex-shrink: 0;
+}
+
+.student-side-note p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--white);
+}
+
+.student-side-note small {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* --- MAIN VIEWPORT --- */
+.student-main {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 100vh;
+  padding: 24px 32px 24px;
+  border-top-left-radius: 28px;
+  background: var(--bg-page);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.student-main::before {
+  position: fixed;
+  z-index: 0;
+  top: -160px;
+  right: -100px;
+  width: 720px;
+  height: 440px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(191, 219, 254, 0.45) 0%, rgba(239, 246, 255, 0.25) 55%, transparent 72%);
+  pointer-events: none;
+  content: '';
+}
+
+.student-main::after {
+  position: fixed;
+  z-index: 0;
+  bottom: -140px;
+  left: 180px;
+  width: 520px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(219, 234, 254, 0.4) 0%, transparent 70%);
+  pointer-events: none;
+  content: '';
+}
+
+.student-main>* {
+  position: relative;
+  z-index: 1;
+  max-width: 1420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- HEADER DASHBOARD --- */
+.student-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.student-header-copy h1 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: clamp(24px, 2.2vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.student-header-copy p {
+  margin: 6px 0 0;
+  color: var(--text-secondary);
+  font-size: 14.5px;
+  font-weight: 500;
+}
+
+.student-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.student-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+}
+
+.student-bell {
+  position: relative;
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 50%;
+  color: var(--text-primary);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.student-bell:hover {
+  background: var(--blue-light-bg);
+  color: var(--blue-primary);
+}
+
+.student-bell-dot {
+  position: absolute;
+  top: 8px;
+  right: 9px;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  background: var(--pink-danger);
+}
+
+.student-avatar-btn {
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.student-avatar-btn:hover {
+  transform: scale(1.04);
+}
+
+.student-avatar {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--white);
+  background: linear-gradient(145deg, #2563EB, #1745A3);
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.24);
+}
+
+.student-school-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  color: var(--blue-deep);
+  background: #DCE8FF;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+/* --- TWO-COLUMN GRID --- */
+.student-dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.95fr) minmax(310px, 0.92fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.student-primary,
+.student-right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+/* --- A. HERO BANNER --- */
+.student-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 248px;
+  overflow: hidden;
+  padding: 28px 30px;
+  border-radius: 24px;
+  color: var(--white);
+  background: linear-gradient(120deg, #1D4ED8 0%, #2563EB 55%, #3B82F6 100%);
+  box-shadow: 0 16px 34px rgba(37, 99, 235, 0.22);
+}
+
+.student-hero::after {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  content: '';
+}
+
+.student-hero-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 50%;
+}
+
+.student-hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  color: #065F46;
+  background: var(--soft-green);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .student-hero-tag {
+  background: rgba(16, 185, 129, 0.22);
+  color: #6EE7B7;
+}
+
+.student-hero-tag i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--green-success);
+}
+
+.student-hero h2 {
+  margin: 12px 0 8px;
+  font-size: clamp(22px, 2vw, 27px);
+  font-weight: 800;
+  line-height: 1.24;
+  letter-spacing: -0.02em;
+}
+
+.student-hero p {
+  max-width: 350px;
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.48;
+}
+
+.student-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 20px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--blue-deep);
+  background: var(--white);
+  font: 700 13.5px var(--font-family);
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.student-hero-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.16);
+}
+
+/* 1. Kunci tinggi container hero agar semua slide sama persis */
+.student-hero {
+  position: relative;
+  min-height: 265px;
+  /* Sesuaikan dengan tinggi slide 2 baris yang paling pas */
+  display: flex;
+  align-items: center;
+  /* Konten teks tetap rapi di tengah secara vertikal */
+  overflow: hidden;
+}
+
+/* 2. Batasi lebar area teks kiri agar tidak melebar menabrak ilustrasi */
+.student-hero-content {
+  /* sesuaikan dengan nama class pembungkus teks & tombol kiri */
+  position: relative;
+  z-index: 2;
+  max-width: 48%;
+  /* Mencegah judul 1 baris memanjang ke area gambar kanan */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* 2. Tempelkan wadah gambar mentok ke atas, kanan, dan bawah */
+.student-hero-art {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 58%;
+  /* Bisa dinaikkan ke 60%–65% kalau ingin lebih lebar */
+  max-width: 600px;
+  /* Naikkan max-width agar tidak tertahan di layar lebar */
+  height: 100%;
+  pointer-events: none;
+}
+
+/* 3. Ganti contain -> cover & tambahkan mask gradasi kiri agar menyatu mulus */
+.student-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Kunci utama agar penuh tanpa celah biru */
+  object-position: right bottom;
+  /* Jaga posisi guru & siswa tetap pas */
+  display: block;
+
+  /* Opsional: bikin sisi kiri gambar memudar halus ke background biru */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 18%);
+  mask-image: linear-gradient(to right, transparent 0%, black 18%);
+}
+
+.student-slider {
+  position: absolute;
+  z-index: 3;
+  right: 24px;
+  bottom: 16px;
+  display: flex;
+  gap: 7px;
+}
+
+.student-slider button {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.42);
+  cursor: pointer;
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.student-slider button.active {
+  width: 20px;
+  background: var(--white);
+}
+
+/* --- SECTION HEADINGS --- */
+.student-section-heading,
+.student-panel-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.student-section-heading {
+  margin-bottom: 12px;
+}
+
+.student-section-heading h2,
+.student-panel-title h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.student-section-heading h2 svg {
+  color: var(--blue-primary);
+}
+
+.student-section-heading p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* --- B. LAYANAN UTAMA 2x2 --- */
+.student-service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.student-service-card {
+  display: flex;
+  min-height: 94px;
+  align-items: center;
+  gap: 15px;
+  padding: 16px 18px;
+  border: 1px solid #E5ECF8;
+  border-radius: 20px;
+  color: var(--text-primary);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.student-service-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(37, 99, 235, 0.22);
+}
+
+.student-service-icon {
+  display: grid;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.service-booking {
+  color: var(--blue-primary);
+  background: var(--blue-light-bg);
+}
+
+.service-safe {
+  color: #EC4899;
+  background: var(--soft-pink);
+}
+
+.service-info {
+  color: var(--green-success);
+  background: var(--soft-green);
+}
+
+.service-history {
+  color: var(--amber-warning);
+  background: var(--soft-orange);
+}
+
+.student-service-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.student-service-copy b {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.student-service-copy small {
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.student-service-arrow {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  place-items: center;
+  margin-left: auto;
+  border-radius: 50%;
+  color: var(--blue-primary);
+  background: #EEF4FF;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.student-service-card:hover .student-service-arrow {
+  background: var(--blue-primary);
+  color: var(--white);
+}
+
+/* --- C. JADWAL KONSELING AKTIF --- */
+.student-schedule-box,
+.student-panel,
+.student-cheer {
+  border-radius: 20px;
+  border: 1px solid #E5ECF8;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.student-schedule-box {
+  padding: 20px 22px;
+}
+
+.student-schedule-box .student-section-heading {
+  margin: 0 0 14px;
+}
+
+.student-schedule-link {
+  color: var(--blue-primary);
+}
+
+.schedule-active-card {
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid #DCE8FF;
+  background: #F8FAFF;
+}
+
+.schedule-active-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.schedule-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--soft-green);
+  color: #065F46;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.schedule-date-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--blue-deep);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.schedule-topic {
+  margin: 0 0 10px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.schedule-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.schedule-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.schedule-meta-item svg {
+  color: var(--blue-primary);
+}
+
+.schedule-empty-state {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px dashed #CBD8F0;
+  background: #F8FAFF;
+}
+
+.schedule-empty-copy {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.schedule-empty-icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--blue-light-bg);
+  color: var(--blue-primary);
+}
+
+.schedule-empty-copy b {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.schedule-empty-copy p {
+  margin: 3px 0 0;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+
+.schedule-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--blue-primary);
+  color: var(--white);
+  font: 700 13px var(--font-family);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.schedule-cta-pill:hover {
+  background: var(--blue-primary-hover);
+  transform: translateY(-1px);
+}
+
+/* --- RIGHT SIDEBAR CONTENT --- */
+.student-panel {
+  padding: 18px 20px;
+}
+
+.student-panel-title {
+  margin-bottom: 14px;
+}
+
+.student-panel-title h2 {
+  font-size: 15.5px;
+}
+
+.student-panel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font: 700 12.5px var(--font-family);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.student-education .student-panel-title h2 svg {
+  color: var(--green-success);
+}
+
+.student-education .student-panel-link {
+  color: #059669;
+}
+
+.education-illustration {
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.education-img {
+  width: 100%;
+  height: 122px;
+  object-fit: cover;
+  display: block;
+}
+
+.student-education h3 {
+  margin: 0 0 6px;
+  color: var(--text-primary);
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.38;
+  letter-spacing: -0.01em;
+}
+
+.student-education>p {
+  margin: 0 0 14px;
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  line-height: 1.48;
+}
+
+.student-read {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border: 0;
+  border-radius: 999px;
+  color: #059669;
+  background: var(--soft-green);
+  font: 700 12.5px var(--font-family);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.student-read:hover {
+  background: #BDF4DC;
+  transform: translateX(2px);
+}
+
+/* --- AKTIVITAS TERBARU --- */
+.student-activity .student-panel-title h2 svg {
+  color: var(--blue-primary);
+}
+
+.student-activity .student-panel-link {
+  color: var(--blue-primary);
+}
+
+.student-activity-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.student-activity-list::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 17px;
+  width: 1.5px;
+  background: #E2E8F0;
+  z-index: 0;
+}
+
+.student-activity-item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.student-activity-item>span {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  border: 2px solid var(--white);
+}
+
+.activity-doc {
+  color: var(--green-success);
+  background: var(--soft-green);
+}
+
+.activity-cal {
+  color: var(--blue-primary);
+  background: var(--blue-light-bg);
+}
+
+.activity-chat {
+  color: #9333EA;
+  background: #F3E8FF;
+}
+
+.student-activity-item p {
+  margin: 1px 0 0;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.student-activity-item small {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-secondary);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+/* --- MOTIVATIONAL CARD --- */
+.student-cheer {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: 108px;
+  padding: 20px 22px;
+  overflow: hidden;
+  border-color: #D2E3FF;
+  background: linear-gradient(135deg, #EAF2FF 0%, #D7E7FF 100%);
+}
+
+.student-cheer-icon {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--blue-primary);
+  background: var(--white);
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.14);
+}
+
+.student-cheer-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 220px;
+}
+
+.student-cheer-copy b {
+  display: block;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.student-cheer-copy p {
+  margin: 5px 0 0;
+  color: #4E628E;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.cheer-hill-img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 104px;
+  height: auto;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+@media (max-width: 1180px) {
+  .student-sidebar {
+    width: 228px;
+    flex-basis: 228px;
+    flex-shrink: 0;
+  }
+
+  .student-menu button {
+    white-space: nowrap;
+    font-size: 13.5px;
+    gap: 11px;
+    padding: 0 13px;
+  }
+
+  .student-side-note {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .student-side-note p {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .student-side-note small {
+    font-size: 10.5px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .student-main,
+  .main-viewport {
+    padding: 24px;
+  }
+
+  .student-hero-art {
+    width: 48%;
+    max-width: 390px;
+  }
+
+  .student-dashboard-grid,
+  .dashboard-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .student-right-column {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .student-cheer {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  #bottom-nav-container {
+    display: flex;
+  }
+
+  .student-shell {
+    display: block;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+    background: var(--bg-page);
+  }
+
+  .student-sidebar {
+    display: none;
+  }
+
+  .student-main {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    padding: 20px 16px 84px;
+    border-top-left-radius: 0;
+  }
+
+  .student-main::after {
+    left: -80px;
+  }
+
+  .student-header {
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .student-header-copy h1 {
+    font-size: 24px;
+  }
+
+  .student-header-copy p {
+    font-size: 13px;
+  }
+
+  .student-header-right {
+    width: 100%;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .student-school-pill {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+
+  .student-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: auto;
+    padding: 20px 18px 0;
+  }
+
+  .student-hero-copy {
+    max-width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .student-hero-art {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: calc(100% + 36px);
+    max-width: none;
+    height: auto;
+    align-self: stretch;
+    margin: 0 -18px;
+  }
+
+  .student-hero-img {
+    width: 100%;
+    max-height: 175px;
+    height: auto;
+    object-fit: cover;
+    object-position: center bottom;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
+  }
+
+  .student-slider {
+    left: 50%;
+    right: auto;
+    bottom: 12px;
+    transform: translateX(-50%);
+  }
+
+  .student-service-grid,
+  .student-right-column {
+    grid-template-columns: 1fr;
+  }
+
+  .student-cheer {
+    grid-column: auto;
+  }
+
+  .student-section-heading p {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   PROFILE SCREEN & DARK MODE OVERRIDES
+   ========================================================================== */
+.profile-page-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.profile-card-box {
+  width: 100%;
+  max-width: 440px;
+  text-align: center;
+  background: var(--surface);
+  border-color: var(--border-color);
+}
+
+.profile-avatar-lg {
+  display: grid;
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 14px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--white);
+  background: linear-gradient(145deg, #2563EB, #1745A3);
+  font-size: 22px;
+  font-weight: 800;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.28);
+}
+
+.profile-name {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.profile-detail {
+  margin: 0 0 22px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+}
+
+.theme-section {
+  margin-bottom: 22px;
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.theme-section-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.theme-toggle-group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.theme-option-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text-secondary);
+  font: 700 13px var(--font-family);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.theme-option-btn:hover {
+  border-color: var(--blue-primary);
+  color: var(--text-primary);
+}
+
+.theme-option-btn.active {
+  border-color: var(--blue-primary);
+  background: var(--blue-primary);
+  color: var(--white);
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.28);
+}
+
+.profile-actions-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Dark Mode Component Overrides */
+[data-theme="dark"] body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .student-main::before {
+  background: radial-gradient(ellipse at center, rgba(37, 99, 235, 0.18) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .student-main::after {
+  background: radial-gradient(ellipse at center, rgba(29, 78, 216, 0.14) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .student-service-card,
+[data-theme="dark"] .student-schedule-box,
+[data-theme="dark"] .student-panel,
+[data-theme="dark"] .student-bell,
+[data-theme="dark"] .card-box,
+[data-theme="dark"] .modal-dialog {
+  background: var(--surface);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .schedule-active-card,
+[data-theme="dark"] .schedule-empty-state {
+  background: var(--surface-soft);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .schedule-date-chip,
+[data-theme="dark"] .student-school-pill {
+  color: #93C5FD;
+}
+
+[data-theme="dark"] .student-school-pill {
+  background: rgba(37, 99, 235, 0.22);
+  border-color: rgba(96, 165, 250, 0.24);
+}
+
+[data-theme="dark"] .student-service-arrow {
+  background: rgba(37, 99, 235, 0.22);
+  color: #60A5FA;
+}
+
+[data-theme="dark"] .student-activity-list::before {
+  background: var(--border-color);
+}
+
+[data-theme="dark"] .student-activity-item > span {
+  border-color: var(--surface);
+}
+
+[data-theme="dark"] .student-cheer {
+  background: linear-gradient(135deg, #172554 0%, #1E3A8A 100%);
+  border-color: #2563EB;
+}
+
+[data-theme="dark"] .student-cheer-copy b {
+  color: var(--white);
+}
+
+[data-theme="dark"] .student-cheer-copy p {
+  color: #BFDBFE;
+}
+
+[data-theme="dark"] .student-read {
+  background: rgba(16, 185, 129, 0.2);
+  color: #6EE7B7;
+}
+
+[data-theme="dark"] .schedule-status-badge {
+  background: rgba(16, 185, 129, 0.2);
+  color: #6EE7B7;
+}
+
+[data-theme="dark"] .student-hero-tag {
+  background-color: #DCFCE7;
+  color: #065F46;
+}
+
+[data-theme="dark"] .student-hero-tag i {
+  background-color: #10B981;
+}
+
+[data-theme="dark"] .student-menu button.active,
+[data-theme="dark"] .menu-item-btn.active {
+  background: rgba(255, 255, 255, 0.18);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .student-menu button.active svg,
+[data-theme="dark"] .menu-item-btn.active svg {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .auth-screen {
+  background: var(--bg-canvas);
+}
+
+[data-theme="dark"] .input-box {
+  background: var(--surface-soft);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .auth-link-row,
+[data-theme="dark"] .register-bottom-link,
+[data-theme="dark"] .register-info-note,
+[data-theme="dark"] .auth-footer {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .simulation-title {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .btn-outline-dark {
+  background: var(--surface-soft);
+  color: var(--text-primary);
+  border-color: #475569;
+}
